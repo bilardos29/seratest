@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sera/feature/list_product/home_presenter.dart';
+import 'package:sera/feature/search/search_screen.dart';
 import 'package:sera/widgets/list_product_card.dart';
 
 import '../../widgets/header_widget.dart';
@@ -40,13 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: InkWell(
               onTap: () {
                 //Push to Search screen
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             DetailMoviePage(
-                //                 movieId:
-                //                 model.id ?? 0)));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchScreen()));
               },
               child: const Icon(
                 Icons.search_sharp,

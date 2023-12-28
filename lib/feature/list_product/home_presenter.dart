@@ -13,7 +13,6 @@ class HomePresenter extends ChangeNotifier {
       print(val);
     }, onSuccess: (response) async {
       //ResponseListModel data = ResponseListModel.fromJson(response);
-      print(response);
       notifyListeners();
     });
   }
@@ -29,7 +28,6 @@ class HomePresenter extends ChangeNotifier {
       print(val);
     }, onSuccess: (response) async {
       listProduct = List<Product>.from(response.map((model)=> Product.fromJson(model)));
-      print(response);
       notifyListeners();
     });
   }

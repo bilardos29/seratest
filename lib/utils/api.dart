@@ -23,7 +23,7 @@ class Api {
 
   Map<String, dynamic> get finalHeader {
     Map<String, dynamic> _finalHeader = {
-      "Content-Type": "application/x-www-form-urlencoded",
+      // "Content-Type": "application/x-www-form-urlencoded",
     };
     return headers == null ? _finalHeader : headers;
   }
@@ -33,7 +33,7 @@ class Api {
       required ValueChanged<String> onError,
       required ValueChanged<dynamic> onSuccess}) async {
     try {
-      var url = 'https://fakestoreapi.com/';
+      var url = 'https://fakestoreapi.com$path';
       //print('url dio $url header $finalHeader, $apiMethod');
       var options = Options(
           responseType: ResponseType.json,

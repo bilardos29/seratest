@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hint: "Username",
                 icons: const Icon(Icons.email),
                 controller: id),
-            Space(20),
+            Space(h: 20),
             InputTextWidget(
               hint: "Password",
               icons: const Icon(Icons.lock),
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextButtonWidget('Forgot password', onClick: () {}),
               ],
             ),
-            Space(32),
+            Space(h: 32),
             MainButton("Sign In", onClick: () {}),
             TextButtonWidget('Didn\'t have any account? Sign Up here', onClick: () {}),
           ],

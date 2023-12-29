@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sera/widgets/base_widget.dart';
 
 class MainButton extends StatelessWidget {
   final String text;
@@ -18,6 +19,7 @@ class MainButton extends StatelessWidget {
           elevation: 0,
           minimumSize: Size(MediaQuery.of(context).size.width, 52),
         ),
-        child: Text(text));
+        child: Text(text,
+            style: BaseWidget.mainTextStyle(colors: Colors.white, size: 16)));
   }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sera/feature/cart/cart_presenter.dart';
+import 'package:sera/feature/cart/cart_screen.dart';
 import 'package:sera/model/product.dart';
 
 import '../../widgets/base_widget.dart';
@@ -17,8 +20,11 @@ class DetailProductScreen extends StatefulWidget {
 }
 
 class _DetailProductScreenState extends State<DetailProductScreen> {
+  late CartPresenter cartPresenter;
+
   @override
   Widget build(BuildContext context) {
+    cartPresenter = Provider.of<CartPresenter>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -27,10 +33,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: const Icon(
-            Icons.arrow_back_ios_sharp,
-            color: Colors.black54,
-          ),
+          child: const Icon(Icons.arrow_back_ios_sharp, color: Colors.black54),
         ),
         actions: [
           Padding(
@@ -38,18 +41,10 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             child: InkWell(
               onTap: () {
                 //Push to Cart screen
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             DetailMoviePage(
-                //                 movieId:
-                //                 model.id ?? 0)));
+                cartPresenter.getListCart().whenComplete(() => BaseWidget.push(context, const CartScreen()));
               },
-              child: const Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.black54,
-              ),
+              child: const Icon(Icons.shopping_cart_outlined,
+                  color: Colors.black54),
             ),
           )
         ],
@@ -58,10 +53,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: ListView(
           children: <Widget>[
-            Image.network(
-              widget.product.image!,
-              height: 300,
-            ),
+            Image.network(widget.product.image!, height: 300),
             const Space(h: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,12 +61,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 Text('USD ${widget.product.price ?? 0}',
                     style: BaseWidget.mainTextStyle(
                         size: 16, colors: Colors.green)),
-                Image.asset(
-                  "images/ic_like.png",
-                  width: 20,
-                  height: 20,
-                  color: Colors.green,
-                )
+                Image.asset("images/ic_like.png",
+                    width: 20, height: 20, color: Colors.green)
               ],
             ),
             const Space(h: 8),

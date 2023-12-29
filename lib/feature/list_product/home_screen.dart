@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sera/feature/cart/cart_presenter.dart';
+import 'package:sera/feature/cart/cart_screen.dart';
 import 'package:sera/feature/list_product/home_presenter.dart';
 import 'package:sera/feature/search/search_screen.dart';
 import 'package:sera/widgets/list_product_card.dart';
 
+import '../../widgets/base_widget.dart';
 import '../../widgets/header_widget.dart';
 import '../detail_product/detail_product_screen.dart';
 
@@ -16,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late HomePresenter presenter;
+  late CartPresenter cartPresenter;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final double itemWidth = size.width / 2.7;
 
     presenter = Provider.of<HomePresenter>(context);
+    cartPresenter = Provider.of<CartPresenter>(context);
     presenter.getListProduct();
 
     return Scaffold(
@@ -41,8 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: InkWell(
               onTap: () {
                 //Push to Search screen
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
+                BaseWidget.push(context, const SearchScreen());
               },
               child: const Icon(
                 Icons.search_sharp,
@@ -55,13 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: InkWell(
               onTap: () {
                 //Push to Cart screen
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             DetailMoviePage(
-                //                 movieId:
-                //                 model.id ?? 0)));
+                cartPresenter.getListCart().whenComplete(() => BaseWidget.push(context, const CartScreen()));
               },
               child: const Icon(
                 Icons.shopping_cart_outlined,
@@ -91,12 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: ListProductCard(
                           product: presenter.listProduct[index],
                           onClick: () {
-                            Navigator.push(
+                            BaseWidget.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => DetailProductScreen(
-                                          product: presenter.listProduct[index],
-                                        )));
+                                DetailProductScreen(
+                                  product: presenter.listProduct[index],
+                                ));
                           },
                         ),
                       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sera/feature/cart/cart_presenter.dart';
 import 'package:sera/feature/detail_product/detail_product_presenter.dart';
 import 'package:sera/feature/list_product/home_presenter.dart';
 import 'package:sera/feature/list_product/home_screen.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => SearchPresenter(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CartPresenter(),
           ),
         ],
         child: MaterialApp(

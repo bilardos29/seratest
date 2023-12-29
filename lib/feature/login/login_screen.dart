@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sera/feature/list_product/home_screen.dart';
+import 'package:sera/widgets/base_widget.dart';
 import 'package:sera/widgets/inputtext_widgets.dart';
 
 import '../../widgets/main_button.dart';
@@ -42,7 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             Space(h: 32),
-            MainButton("Sign In", onClick: () {}),
+            MainButton("Sign In", onClick: () {
+              BaseWidget.push(context, const HomeScreen());
+            }),
             TextButtonWidget('Didn\'t have any account? Sign Up here', onClick: () {}),
           ],
         ),

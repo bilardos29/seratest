@@ -25,7 +25,7 @@ class _InputTextWidgetState extends State<InputTextWidget> {
   Widget build(BuildContext context) {
     return TextField(
         controller: widget.controller,
-        obscureText: widget.isPassword ? isPassVisible : false,
+        obscureText: widget.isPassword ? !isPassVisible : false,
         decoration: InputDecoration(
             prefixIcon: widget.icons,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -38,7 +38,7 @@ class _InputTextWidgetState extends State<InputTextWidget> {
                     isPassVisible = !isPassVisible;
                   });
                 },
-                child: Icon(isPassVisible
+                child: Icon(!isPassVisible
                     ? Icons.remove_red_eye
                     : Icons.remove_red_eye_outlined))
                 : SizedBox()));

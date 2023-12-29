@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     presenter = Provider.of<HomePresenter>(context);
     cartPresenter = Provider.of<CartPresenter>(context);
-    presenter.getListProduct();
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: InkWell(
               onTap: () {
                 //Push to Cart screen
-                cartPresenter.getListCart().whenComplete(() => BaseWidget.push(context, const CartScreen()));
+                cartPresenter.getListCart().whenComplete(
+                    () => BaseWidget.push(context, const CartScreen()));
               },
               child: const Icon(
                 Icons.shopping_cart_outlined,
@@ -74,11 +74,42 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           children: <Widget>[
             const HeaderWidget('Jhon'),
+            presenter.listCat.isNotEmpty
+                ? Container(
+                    height: 34,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: presenter.listCat.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              presenter.changeCat(index);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: presenter.isCatSelected(index)
+                                      ? Colors.green
+                                      : Colors.white),
+                              child: Text(
+                                presenter.listCat[index],
+                                style: TextStyle(
+                                    color: presenter.isCatSelected(index)
+                                        ? Colors.white
+                                        : Colors.black),
+                              ),
+                            ),
+                          );
+                        }),
+                  )
+                : const SizedBox(),
             presenter.listProduct.isNotEmpty
                 ? GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 7,
+                    itemCount: presenter.listProduct.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: (itemWidth / itemHeight),
@@ -105,3 +136,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+//mor_2314
+//83r5^_

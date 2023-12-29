@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sera/feature/cart/cart_presenter.dart';
 import 'package:sera/feature/detail_product/detail_product_presenter.dart';
 import 'package:sera/feature/list_product/home_presenter.dart';
-import 'package:sera/feature/list_product/home_screen.dart';
 
 import 'feature/login/login_presenter.dart';
 import 'feature/login/login_screen.dart';
@@ -42,6 +41,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
             ),
-            home: const HomeScreen()));
+            home: const LoginScreen()));
   }
 }

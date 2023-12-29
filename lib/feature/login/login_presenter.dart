@@ -10,18 +10,24 @@ class LoginPresenter extends ChangeNotifier {
     required ValueChanged<String> onError,
     required VoidCallback onSuccess,
   }) {
-    var data = {
-      "username": '$username',
-      "password": '$password',
-    };
-    var api = Api(path: "/auth/login", apiMethod: ApiMethod.POST, data: data);
+    if (username.isEmpty) {
+      onError("Username can not empty.");
+    } else if (password.isEmpty) {
+      onError("Password can not empty.");
+    } else {
+      var data = {
+        "username": '$username',
+        "password": '$password',
+      };
+      var api = Api(path: "/auth/login", apiMethod: ApiMethod.POST, data: data);
 
-    api.request(onError: (val) {
-      onError("username or password is incorrect");
-    }, onSuccess: (response) async {
-      Login login = Login.fromJson(response);
-      print(login.token);
-      onSuccess();
-    });
+      api.request(onError: (val) {
+        onError("username or password is incorrect");
+      }, onSuccess: (response) async {
+        Login login = Login.fromJson(response);
+        print(login.token);
+        onSuccess();
+      });
+    }
   }
 }

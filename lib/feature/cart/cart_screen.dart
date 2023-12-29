@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sera/feature/cart/cart_presenter.dart';
+import 'package:sera/model/cart_product.dart';
 import 'package:sera/widgets/base_widget.dart';
 import 'package:sera/widgets/cart_product_card.dart';
 
@@ -53,13 +54,20 @@ class _CartScreenState extends State<CartScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: presenter.listCartProduct.length,
                     itemBuilder: (context, index) {
+                      CartProduct item = presenter.listCartProduct[index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 12),
                         child: CartProductCard(
-                          cartProduct: presenter.listCartProduct[index],
-                          onMinus: () {},
-                          onAdd: () {},
-                          onDelete: () {},
+                          cartProduct: item,
+                          onMinus: () {
+                            presenter.minusQuantity(item);
+                          },
+                          onAdd: () {
+                            presenter.addQuantity(item);
+                          },
+                          onDelete: () {
+                            presenter.deleteCart(item: item);
+                          },
                         ),
                       );
                     })

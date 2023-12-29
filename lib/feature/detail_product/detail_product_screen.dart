@@ -41,7 +41,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             child: InkWell(
               onTap: () {
                 //Push to Cart screen
-                cartPresenter.getListCart().whenComplete(() => BaseWidget.push(context, const CartScreen()));
+                cartPresenter.getListCart().whenComplete(
+                    () => BaseWidget.push(context, const CartScreen()));
               },
               child: const Icon(Icons.shopping_cart_outlined,
                   color: Colors.black54),
@@ -66,10 +67,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               ],
             ),
             const Space(h: 8),
-            Text(widget.product.title ?? '',
-                // overflow: TextOverflow.fade,
-                // maxLines: 3,
-                style: BaseWidget.h1TextStyle()),
+            Text(widget.product.title ?? '', style: BaseWidget.h1TextStyle()),
             const Space(h: 8),
             Row(
               children: [
@@ -92,7 +90,11 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         padding: const EdgeInsets.all(16),
         child: MainButton(
           'Add to Cart',
-          onClick: () {},
+          onClick: () {
+            cartPresenter
+                .addIntoCart(product: widget.product)
+                .whenComplete(() => Navigator.pop(context));
+          },
         ),
       ),
     );

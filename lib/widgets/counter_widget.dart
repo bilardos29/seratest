@@ -30,10 +30,9 @@ class CounterWidget extends StatelessWidget {
           const Space(w: 12),
           IconButtonWidget(Icons.add, onClick: onAdd),
         ]),
-        const Icon(
-          Icons.delete,
-          color: Colors.black54,
-          size: 20,
+        IconButton(
+          icon: Icon(Icons.delete, color: Colors.black54, size: 20),
+          onPressed: onDelete,
         )
       ],
     );

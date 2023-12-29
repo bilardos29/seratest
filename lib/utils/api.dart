@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class ApiMethod {
   static const GET = "GET";
   static const POST = "POST";
+  static const PUT = "PUT";
+  static const DELETE = "DELETE";
 }
 
 class Api {
